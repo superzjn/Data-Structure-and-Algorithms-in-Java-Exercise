@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 // highArray.java
 // demonstrates array class with high-level interface
 // to run this program: C>java HighArrayApp
@@ -57,6 +59,9 @@ class HighArray {
         System.out.println("");
     }
 
+    //-----------------------------------------------------------
+
+    // Project 2.1
     public long getMax() {
         if (nElems == 0) return -1;
         long max = 0;
@@ -65,6 +70,32 @@ class HighArray {
         }
         return max;
     }
+    //-----------------------------------------------------------
+
+
+    // Project 2.2
+    public void removeMax() {
+
+        if (nElems == 0) return;
+        int maxIndex = 0;
+        for (int i = 0; i < nElems; i++) {
+            if (a[i] > a[maxIndex]) maxIndex = i;
+        }
+
+        for (int i = maxIndex; i < nElems; i++) {
+            a[i] = a[i + 1];
+        }
+        nElems--;
+    }
+
+    //-----------------------------------------------------------
+
+    // Project 2.3
+    public int getnElems() {
+        return nElems;
+    }
+
+
     //-----------------------------------------------------------
 }  // end class HighArray
 
@@ -87,19 +118,40 @@ class HighArrayApp {
         arr.insert(33);
 
         arr.display();                // display items
-        long max = arr.getMax();
-        System.out.println("Max number is " + max);
 
-        int searchKey = 35;           // search for item
-        if (arr.find(searchKey))
-            System.out.println("Found " + searchKey);
-        else
-            System.out.println("Can't find " + searchKey);
+        //-----------------------------------------------------------
 
-        arr.delete(00);               // delete 3 items
-        arr.delete(55);
-        arr.delete(99);
+        // Project 2.3
+        int size = arr.getnElems();
+        long[] sortedArray = new long[size];
 
-        arr.display();                // display items again
+        for (int i = 0; i < size; i++) {
+            sortedArray[i] = arr.getMax();
+            arr.removeMax();
+        }
+
+        System.out.println(Arrays.toString(sortedArray));
+
+        //-----------------------------------------------------------
+
+//        // Project 2.1
+//        long max = arr.getMax();
+//        System.out.println("Max number is " + max);
+        //-----------------------------------------------------------
+//        // Project 2.2
+//        arr.removeMax();
+//        arr.display();                  // display after removing max
+//
+//        int searchKey = 35;           // search for item
+//        if (arr.find(searchKey))
+//            System.out.println("Found " + searchKey);
+//        else
+//            System.out.println("Can't find " + searchKey);
+//
+//        arr.delete(00);               // delete 3 items
+//        arr.delete(55);
+//        arr.delete(99);
+//
+//        arr.display();                // display items again
     }  // end main()
 }  // end class HighArrayApp
