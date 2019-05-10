@@ -60,40 +60,70 @@ class OrdArray {
         int upperBound = nElems - 1;
         int lowerBound = 0;
 
-        while (true) {
+        if (nElems != 0 && value > a[nElems - 1]) a[nElems] = value;
+        else {
+            while (true) {
 
-            cursor = (upperBound + lowerBound) / 2;
+                cursor = (upperBound + lowerBound) / 2;
 
-            if (upperBound > lowerBound ) {
+                if (upperBound > lowerBound) {
 
-                if (value > a[cursor]) {
-                    lowerBound = cursor +1 ;
-                    continue;
+                    if (value > a[cursor]) {
+                        lowerBound = cursor + 1;
+                        continue;
+                    } else {
+                        upperBound = cursor - 1;
+                        continue;
+                    }
                 } else {
-                    upperBound = cursor -1;
-                    continue;
+                    break;
                 }
-            } else {
-                break;
             }
-        }
 
-        if (nElems >= 1) {
             for (int i = nElems - 1; i >= cursor; i--) {
                 a[i + 1] = a[i];
             }
+
+            a[cursor] = value;
         }
-        a[cursor] = value;
         nElems++;
 
     }
     //-----------------------------------------------------------
     // Project 2.5
 
-//    public long[] merge(long[] array1, long[] array2) {
-//
-//    }
+    public void merge(OrdArray array1, OrdArray array2) {
 
+        long[] a1 = array1.a;
+        long[] a2 = array2.a;
+
+        int j = 0;
+
+        while (array1.nElems != 0 && array2.nElems != 0) {
+
+            if (a1[0] >= a2[0]) {
+                a[j] = a2[0];
+                array2.delete(a2[0]);
+            } else {
+                a[j] = a1[0];
+                array1.delete(a1[0]);
+            }
+            j++;
+            nElems++;
+
+        }
+
+        if (array1.nElems != 0) {
+            for (int i = 0; i < array1.nElems; i++) {
+                this.binaryInsert(a1[i]);
+            }
+        } else if (array2.nElems != 0) {
+            for (int i = 0; i < array2.nElems; i++) {
+                this.binaryInsert(a2[i]);
+            }
+        }
+
+    }
 
     //-----------------------------------------------------------
     public boolean delete(long value) {
@@ -126,45 +156,52 @@ class OrderedApp {
         OrdArray arr;                  // reference to array
         arr = new OrdArray(maxSize);   // create the array
 
-//        arr.insert(77);                // insert 10 items
-//        arr.insert(99);
-//        arr.insert(44);
-//        arr.insert(55);
-//        arr.insert(22);
-//        arr.insert(88);
-//        arr.insert(11);
-//        arr.insert(00);
-//        arr.insert(66);
-//        arr.insert(33);
-//
-//        int searchKey = 55;            // search for item
-//        if (arr.find(searchKey) != arr.size())
-//            System.out.println("Found " + searchKey);
-//        else
-//            System.out.println("Can't find " + searchKey);
-//
-//        arr.display();                 // display items
-//
-//        arr.delete(00);                // delete 3 items
-//        arr.delete(55);
-//        arr.delete(99);
-//
-//        arr.display();                 // display items again
-//
-//        //------- project 2.4
-//        arr.binaryInsert(63);
-//        arr.display();
+        arr.insert(77);                // insert 10 items
+        arr.insert(99);
+        arr.insert(44);
+        arr.insert(55);
+        arr.insert(22);
+        arr.insert(88);
+        arr.insert(11);
+        arr.insert(00);
+        arr.insert(66);
+        arr.insert(33);
+
+        int searchKey = 55;            // search for item
+        if (arr.find(searchKey) != arr.size())
+            System.out.println("Found " + searchKey);
+        else
+            System.out.println("Can't find " + searchKey);
+
+        arr.display();                 // display items
+
+        arr.delete(00);                // delete 3 items
+        arr.delete(55);
+        arr.delete(99);
+
+        arr.display();                 // display items again
+
+        //------- project 2.4
+        arr.binaryInsert(63);
+        arr.display();
 
         //------- project 2.5
         OrdArray arr2 = new OrdArray(maxSize);
 
-        arr2.binaryInsert(25);
         arr2.binaryInsert(35);
+        arr2.binaryInsert(25);
         arr2.binaryInsert(45);
         arr2.binaryInsert(86);
         arr2.binaryInsert(123);
 
         arr2.display();
+
+        OrdArray marr = new OrdArray(maxSize);
+        marr.merge(arr, arr2);
+        marr.display();
+
+        //------- project 2.6
+
 
     }  // end main()
 }  // end class OrderedApp
