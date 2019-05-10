@@ -200,8 +200,5 @@ class OrderedApp {
         marr.merge(arr, arr2);
         marr.display();
 
-        //------- project 2.6
-
-
     }  // end main()
 }  // end class OrderedApp

@@ -96,6 +96,30 @@ class HighArray {
     }
 
 
+    // Project 2.6
+    public void noDups() {
+
+        if (nElems == 0) return;
+
+        for (int i = 0; i < nElems - 1; i++) {
+            for (int j = i + 1; j < nElems; j++) {
+                if (a[i] == a[j]) {
+                    a[j] = Long.MAX_VALUE;
+                }
+            }
+        }
+
+        for (int i=0; i<nElems;i++) {
+            if (a[i] == Long.MAX_VALUE) {
+                for (int j=i; j<nElems; j++) {
+                    a[j] = a[j+1];
+                    nElems--;
+                }
+            }
+        }
+
+    }
+
     //-----------------------------------------------------------
 }  // end class HighArray
 
@@ -134,24 +158,45 @@ class HighArrayApp {
 
         //-----------------------------------------------------------
 
-//        // Project 2.1
-//        long max = arr.getMax();
-//        System.out.println("Max number is " + max);
+        // Project 2.1
+        long max = arr.getMax();
+        System.out.println("Max number is " + max);
         //-----------------------------------------------------------
-//        // Project 2.2
-//        arr.removeMax();
-//        arr.display();                  // display after removing max
-//
-//        int searchKey = 35;           // search for item
-//        if (arr.find(searchKey))
-//            System.out.println("Found " + searchKey);
-//        else
-//            System.out.println("Can't find " + searchKey);
-//
-//        arr.delete(00);               // delete 3 items
-//        arr.delete(55);
-//        arr.delete(99);
-//
-//        arr.display();                // display items again
+        // Project 2.2
+        arr.removeMax();
+        arr.display();                  // display after removing max
+
+        int searchKey = 35;           // search for item
+        if (arr.find(searchKey))
+            System.out.println("Found " + searchKey);
+        else
+            System.out.println("Can't find " + searchKey);
+
+        arr.delete(00);               // delete 3 items
+        arr.delete(55);
+        arr.delete(99);
+
+        arr.display();                // display items again
+
+
+        arr.insert(77);               // insert 10 items
+        arr.insert(99);
+        arr.insert(44);
+        arr.insert(55);
+        arr.insert(22);
+        arr.insert(99);         // Add for project 2.6
+        arr.insert(88);
+        arr.insert(11);
+        arr.insert(00);
+        arr.insert(66);
+        arr.insert(33);
+        arr.insert(33);
+        arr.insert(88);
+        arr.insert(77);
+        System.out.println("Before removing dups");
+        arr.display();
+        arr.noDups();
+        System.out.println("After removing dups");
+        arr.display();
     }  // end main()
 }  // end class HighArrayApp
