@@ -32,7 +32,32 @@ class ArrayIns {
     public void insertionSort() {
         int in, out;
 
+
+        // Project 3.5
+        int numberOfCopies = 0;
+        int numberOfComp = 0;
+
         for (out = 1; out < nElems; out++)     // out is dividing line
+        {
+            long temp = a[out];                 // remove marked item
+            in = out;                            // start shifts at out
+            while (in > 0) {
+                numberOfComp++;
+                if (a[in - 1] >= temp)          // until one is smaller,
+                {
+                    a[in] = a[in - 1];
+                    --in;
+                    continue;
+                } else --in;
+
+            }  // end while
+            a[in] = temp;                   // insert marked item
+
+        }  // end for
+
+        //--------------------------------------------------------------
+        // Original Version
+       /* for (out = 1; out < nElems; out++)     // out is dividing line
         {
             long temp = a[out];            // remove marked item
             in = out;                      // start shifts at out
@@ -42,7 +67,10 @@ class ArrayIns {
                 --in;                       // go left one position
             }
             a[in] = temp;                  // insert marked item
-        }  // end for
+        }  // end for*/
+
+        System.out.println("Number of Copies made: " + numberOfCopies);
+        System.out.println("Number of Comparisons made: " + numberOfComp);
     }  // end insertionSort()
 
     //--------------------------------------------------------------
@@ -55,6 +83,7 @@ class ArrayIns {
 
     }
 
+    //--------------------------------------------------------------
     //--------------Project 3.3-------
     public void noDups() {
 
@@ -71,11 +100,30 @@ class ArrayIns {
             }
 
             nodup_array[nodup_index++] = a[j];
-            i = i + dups+1;
+            i = i + dups + 1;
         }
 
         a = nodup_array;
     }
+
+    //---------- Project 3.3 method 2--------
+//    public void noDups() {
+//        int nextAvailable = 1;
+//        int numDups = 0;
+//
+//        for (int i = 1; i < nElems; i++) {
+//            if (a[i] != a[i - 1]) {
+//                if (a[nextAvailable] != a[i]) {
+//                    a[nextAvailable] = a[i];
+//                }
+//                nextAvailable++;
+//            }
+//            else {
+//                numDups++;
+//            }
+//        }
+//        nElems -= numDups;
+//    }
 
 
 }  // end class ArrayIns
@@ -101,22 +149,23 @@ class InsertSortApp {
 //
 //        }
 
-
-        arr.insert(77);               // insert 10 items
         arr.insert(99);
+        arr.insert(77);
         arr.insert(44);
         arr.insert(55);
-        arr.insert(22);
-        arr.insert(88);
-        arr.insert(11);
-        arr.insert(00);
-        arr.insert(66);
-        arr.insert(33);
+//        arr.insert(22);
+//        arr.insert(88);
+//        arr.insert(11);
+//        arr.insert(00);
+//        arr.insert(66);
+//        arr.insert(33);
 
-        arr.insert(77);
-        arr.insert(99);
-        arr.insert(44);
-        arr.insert(44);
+        // Projet 3.3
+//        arr.insert(00);
+//        arr.insert(77);
+//        arr.insert(99);
+//        arr.insert(44);
+//        arr.insert(44);
 
         long startTime = System.nanoTime();
 
@@ -132,8 +181,9 @@ class InsertSortApp {
         // Project 3.2
         System.out.println("Median value is " + arr.median());
 
-        arr.noDups();
-        arr.display();                // display them again
+        // Project 3.3
+//        arr.noDups();
+//        arr.display();                // display them again
 
 
     }  // end main()

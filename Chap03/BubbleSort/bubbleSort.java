@@ -40,7 +40,7 @@ class ArrayBub {
 //    }  // end bubbleSort()
 
 
-    //--------- Project 3.1
+    //--------- Project 3.1-----------------------------------------
 
     public void bubbleSort() {
         int out_left, out_right, in;
@@ -64,6 +64,25 @@ class ArrayBub {
         }
 
     }  // end bubbleSort()
+
+    //--------------------------------------------------------------
+    //--------------Project 3.4-------
+    public void oddEvenSort() {
+
+
+        for (int i = 0; i < nElems / 2 ; i++) {
+            for (int odd = 0; odd < nElems-1; odd += 2) {
+                if (a[odd] > a[odd + 1]) swap(odd, odd + 1);
+                display();
+            }
+            for (int even = 1; even < nElems-1; even += 2) {
+                if (a[even] > a[even + 1]) swap(even, even + 1);
+                display();
+
+            }
+        }
+    }
+
 
     //--------------------------------------------------------------
     private void swap(int one, int two) {
@@ -105,9 +124,11 @@ class BubbleSortApp {
         arr.insert(66);
         arr.insert(33);
 
+
         long startTime = System.nanoTime();
         arr.display();                // display items
-        arr.bubbleSort();             // bubble sort them
+//        arr.bubbleSort();             // bubble sort them
+        arr.oddEvenSort();
         arr.display();                // display them again
         long endTime = System.nanoTime();
         System.out.println("That took " + (double) (endTime - startTime) / 1_000_000 + " seconds");
