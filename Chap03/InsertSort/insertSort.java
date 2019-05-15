@@ -58,19 +58,23 @@ class ArrayIns {
     //--------------Project 3.3-------
     public void noDups() {
 
-        for (int i = 0; i < nElems - 1; i++) {
-            int shift = 0;
+        long[] nodup_array = new long[nElems];
+        int nodup_index = 0;
+
+        for (int i = 0; i < nElems - 1; ) {
+            int dups = 0;
 
             int j = i;
             while (a[j] == a[j + 1]) {
-                shift++;
+                dups++;
                 j++;
             }
 
-            for (;shift>=0;shift--)
-            a[j+1-shift] = a[j+1];
+            nodup_array[nodup_index++] = a[j];
+            i = i + dups+1;
         }
 
+        a = nodup_array;
     }
 
 
@@ -80,7 +84,7 @@ class ArrayIns {
 class InsertSortApp {
     public static void main(String[] args) {
 //        int maxSize = 10000;            // array size
-        int maxSize = 10;
+        int maxSize = 20;
 
         ArrayIns arr;                 // reference to array
         arr = new ArrayIns(maxSize);  // create the array
@@ -101,13 +105,13 @@ class InsertSortApp {
         arr.insert(77);               // insert 10 items
         arr.insert(99);
         arr.insert(44);
-//        arr.insert(55);
-//        arr.insert(22);
-//        arr.insert(88);
-//        arr.insert(11);
-//        arr.insert(00);
-//        arr.insert(66);
-//        arr.insert(33);
+        arr.insert(55);
+        arr.insert(22);
+        arr.insert(88);
+        arr.insert(11);
+        arr.insert(00);
+        arr.insert(66);
+        arr.insert(33);
 
         arr.insert(77);
         arr.insert(99);
