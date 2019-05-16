@@ -34,33 +34,67 @@ class ArrayIns {
 
         //------------  Project 3.5---------------------------------
 
-        int numberOfComp = 0, numberOfCopies = 0;
+//        int numberOfComp = 0, numberOfCopies = 0;
+//
+//        for (out = 1; out < nElems; out++) {
+//
+//            long temp = a[out];
+//            numberOfCopies++;
+//
+//            in = out;
+//            while (in > 0) {
+//                numberOfComp++;
+//
+//                if (a[in - 1] >= temp) {
+//                    a[in] = a[in - 1];
+//                    numberOfCopies++;
+//                    in--;
+//                    a[in] = temp;
+//                    numberOfCopies++;
+//
+//                } else {
+//                    a[in] = temp;
+//                    numberOfCopies++;
+//                    break;
+//                }
+//            }
+//
+//        }  // end for
+
+
+        //--------------------------------------------------------------
+        //--------------Project 3.6---------------------------------
+
+        int dups = 0;
 
         for (out = 1; out < nElems; out++) {
 
             long temp = a[out];
-            numberOfCopies++;
-
             in = out;
-            while (in > 0) {
-                numberOfComp++;
 
-                if (a[in - 1] >= temp) {
+            while (in > dups) {
+                if (a[in - 1] > temp) {
                     a[in] = a[in - 1];
-                    numberOfCopies++;
                     in--;
-                    a[in] = temp;
-                    numberOfCopies++;
-
+                } else if (a[in - 1] == temp) {
+                    a[in] = a[in - 1];
+                    temp = -1;
+                    in--;
                 } else {
                     a[in] = temp;
-                    numberOfCopies++;
                     break;
                 }
             }
 
-        }  // end for
+            a[in] = temp;
+            // Increment the number of dups when copying so that in>dups can ignore the items before index [dups]
+            if (temp == -1) dups++;
+        }
 
+        for (int i = dups; i < nElems; i++) {
+            a[i - dups] = a[i];
+        }
+        nElems -= dups;
 
         //--------------------------------------------------------------
         // Original Version
@@ -76,12 +110,13 @@ class ArrayIns {
             a[in] = temp;                  // insert marked item
         }  // end for*/
 
-        System.out.println("Number of Copies made: " + numberOfCopies);
-        System.out.println("Number of Comparisons made: " + numberOfComp);
+        // Project 3.5
+//        System.out.println("Number of Copies made: " + numberOfCopies);
+//        System.out.println("Number of Comparisons made: " + numberOfComp);
     }  // end insertionSort()
 
     //--------------------------------------------------------------
-    //--------------Project 3.2-------
+    //--------------Project 3.2---------------------------------
     // Return the median value in the array
     public long median() {
         insertionSort();
@@ -91,7 +126,7 @@ class ArrayIns {
     }
 
     //--------------------------------------------------------------
-    //--------------Project 3.3-------
+    //--------------Project 3.3---------------------------------
     public void noDups() {
 
         long[] nodup_array = new long[nElems];
@@ -156,37 +191,37 @@ class InsertSortApp {
 //
 //        }
 
-//        arr.insert(99);
-//        arr.insert(77);
-//        arr.insert(44);
-//        arr.insert(55);
-//        arr.insert(22);
-//        arr.insert(88);
-//        arr.insert(11);
-//        arr.insert(00);
-//        arr.insert(66);
-//        arr.insert(33);
+        arr.insert(99);
+        arr.insert(77);
+        arr.insert(44);
+        arr.insert(55);
+        arr.insert(22);
+        arr.insert(88);
+        arr.insert(11);
+        arr.insert(00);
+        arr.insert(66);
+        arr.insert(33);
 
 
         // Test for project 3.5. An almost sorted array
-        arr.insert(1);
-        arr.insert(2);
-        arr.insert(4);
-        arr.insert(5);
-        arr.insert(3);
-        arr.insert(6);
-        arr.insert(7);
-        arr.insert(8);
-        arr.insert(33);
-        arr.insert(66);
+//        arr.insert(1);
+//        arr.insert(2);
+//        arr.insert(4);
+//        arr.insert(5);
+//        arr.insert(3);
+//        arr.insert(6);
+//        arr.insert(7);
+//        arr.insert(8);
+//        arr.insert(33);
+//        arr.insert(66);
 
 
         // Projet 3.3
-//        arr.insert(00);
-//        arr.insert(77);
-//        arr.insert(99);
-//        arr.insert(44);
-//        arr.insert(44);
+        arr.insert(00);
+        arr.insert(77);
+        arr.insert(99);
+        arr.insert(44);
+        arr.insert(44);
 
         long startTime = System.nanoTime();
 
@@ -200,7 +235,7 @@ class InsertSortApp {
         System.out.println("That took " + (double) (endTime - startTime) / 1_000_000 + " seconds");
 
         // Project 3.2
-        System.out.println("Median value is " + arr.median());
+//        System.out.println("Median value is " + arr.median());
 
         // Project 3.3
 //        arr.noDups();
