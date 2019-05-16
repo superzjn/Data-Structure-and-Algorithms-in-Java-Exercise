@@ -32,28 +32,35 @@ class ArrayIns {
     public void insertionSort() {
         int in, out;
 
+        //------------  Project 3.5---------------------------------
 
-        // Project 3.5
-        int numberOfCopies = 0;
-        int numberOfComp = 0;
+        int numberOfComp = 0, numberOfCopies = 0;
 
-        for (out = 1; out < nElems; out++)     // out is dividing line
-        {
-            long temp = a[out];                 // remove marked item
-            in = out;                            // start shifts at out
+        for (out = 1; out < nElems; out++) {
+
+            long temp = a[out];
+            numberOfCopies++;
+
+            in = out;
             while (in > 0) {
                 numberOfComp++;
-                if (a[in - 1] >= temp)          // until one is smaller,
-                {
-                    a[in] = a[in - 1];
-                    --in;
-                    continue;
-                } else --in;
 
-            }  // end while
-            a[in] = temp;                   // insert marked item
+                if (a[in - 1] >= temp) {
+                    a[in] = a[in - 1];
+                    numberOfCopies++;
+                    in--;
+                    a[in] = temp;
+                    numberOfCopies++;
+
+                } else {
+                    a[in] = temp;
+                    numberOfCopies++;
+                    break;
+                }
+            }
 
         }  // end for
+
 
         //--------------------------------------------------------------
         // Original Version
@@ -149,16 +156,30 @@ class InsertSortApp {
 //
 //        }
 
-        arr.insert(99);
-        arr.insert(77);
-        arr.insert(44);
-        arr.insert(55);
+//        arr.insert(99);
+//        arr.insert(77);
+//        arr.insert(44);
+//        arr.insert(55);
 //        arr.insert(22);
 //        arr.insert(88);
 //        arr.insert(11);
 //        arr.insert(00);
 //        arr.insert(66);
 //        arr.insert(33);
+
+
+        // Test for project 3.5. An almost sorted array
+        arr.insert(1);
+        arr.insert(2);
+        arr.insert(4);
+        arr.insert(5);
+        arr.insert(3);
+        arr.insert(6);
+        arr.insert(7);
+        arr.insert(8);
+        arr.insert(33);
+        arr.insert(66);
+
 
         // Projet 3.3
 //        arr.insert(00);
