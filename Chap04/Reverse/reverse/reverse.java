@@ -1,3 +1,5 @@
+package reverse;
+
 // reverse.java
 // stack used to reverse a string
 // to run this program: C>java ReverseApp
