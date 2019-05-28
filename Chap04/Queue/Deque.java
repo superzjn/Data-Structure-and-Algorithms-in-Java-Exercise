@@ -1,7 +1,7 @@
 
 //-------Project 4.2----------------------------------
 
-public class Deque {
+class Deque {
 
     private int nItems;
     private int front;
@@ -56,7 +56,7 @@ public class Deque {
         if (isEmpty()) {
             System.out.println("Queue is empty");
         } else {
-            if (front == rear) {
+            if (front == rear) {                    // Only one item in the queue
                 rear--;
             } else {
                 if (front == maxSize - 1) front = 0;
@@ -67,18 +67,24 @@ public class Deque {
 
     }
 
-    public void removeRight() {
+    public int removeRight() {
+        int item = 0;
         if (isEmpty()) {
             System.out.println("Queue is empty");
+            return -1;
         } else {
-            if (front == rear) {
-                rear--;
+            if (front == rear) {                    // Only one item in the queue
+                item = queueArray[rear--];
             } else {
-                if (rear == 0) rear = maxSize - 1;
-                else rear--;
+                if (rear == 0) {
+                    item = queueArray[rear];
+                    rear = maxSize - 1;
+                }
+                else item = queueArray[rear--];
             }
             nItems--;
         }
+        return item;
     }
 
     public boolean isEmpty() {
@@ -137,6 +143,52 @@ class dequeApp {
 //        deque.showFromRear();
 
     }
+
+    //--------------- Project 4.3 ----------------------------------
+    class StackXX {
+
+        int maxSize;
+        int top;
+        Deque deque;
+
+        public StackXX(int s) {
+            this.maxSize = s;
+            top = -1;
+            deque = new Deque(s);
+        }
+
+        public void push(int item) {
+            if (isFull()) System.out.println("Stack is full");
+            else {
+                deque.insertRight(item);
+                top++;
+            }
+
+        }
+
+        public int pop() {
+            deque.removeRight();
+            top--;
+        }
+
+        public int peek() {
+
+        }
+
+        public boolean isEmpty() {
+            return top == -1;
+        }
+
+        public boolean isFull() {
+            return top == maxSize - 1;
+        }
+
+    }
+
+    class stackXXApp {
+
+    }
+
 }
 
 
