@@ -79,8 +79,7 @@ class Deque {
                 if (rear == 0) {
                     item = queueArray[rear];
                     rear = maxSize - 1;
-                }
-                else item = queueArray[rear--];
+                } else item = queueArray[rear--];
             }
             nItems--;
         }
@@ -110,6 +109,11 @@ class Deque {
             if (rear == -1) rear = maxSize - 1;
         }
         System.out.println();
+    }
+
+    // return the rightmost item from the queue. Added for project 4.3
+    public int rightmost() {
+        return queueArray[rear];
     }
 
 
@@ -143,49 +147,69 @@ class dequeApp {
 //        deque.showFromRear();
 
     }
+}
 
-    //--------------- Project 4.3 ----------------------------------
-    class StackXX {
+//--------------- Project 4.3 ----------------------------------
+class StackXX {
 
-        int maxSize;
-        int top;
-        Deque deque;
+    int maxSize;
+    int top;
+    Deque deque;
 
-        public StackXX(int s) {
-            this.maxSize = s;
-            top = -1;
-            deque = new Deque(s);
-        }
-
-        public void push(int item) {
-            if (isFull()) System.out.println("Stack is full");
-            else {
-                deque.insertRight(item);
-                top++;
-            }
-
-        }
-
-        public int pop() {
-            deque.removeRight();
-            top--;
-        }
-
-        public int peek() {
-
-        }
-
-        public boolean isEmpty() {
-            return top == -1;
-        }
-
-        public boolean isFull() {
-            return top == maxSize - 1;
-        }
-
+    public StackXX(int s) {
+        this.maxSize = s;
+        top = -1;
+        deque = new Deque(s);
     }
 
-    class stackXXApp {
+    public void push(int item) {
+        if (isFull()) System.out.println("Stack is full");
+        else {
+            deque.insertRight(item);
+            top++;
+        }
+    }
+
+    public int pop() {
+        top--;
+        return deque.removeRight();
+    }
+
+    public int peek() {
+        return deque.rightmost();
+    }
+
+    public boolean isEmpty() {
+        return top == -1;
+    }
+
+    public boolean isFull() {
+        return top == maxSize - 1;
+    }
+
+    public void showAll() {
+        deque.showFromFront();
+    }
+}
+
+
+class stackXXApp {
+    public static void main(String[] args) {
+        StackXX stackxx = new StackXX(5);
+        stackxx.push(10);
+        stackxx.push(20);
+        stackxx.push(30);
+        stackxx.push(40);
+        stackxx.push(50);
+        stackxx.showAll();
+
+        System.out.println(stackxx.pop() + " poped");
+        System.out.println(stackxx.pop() + " poped");
+
+        stackxx.showAll();
+
+        System.out.println("Peek is " + stackxx.peek());
+
 
     }
 
