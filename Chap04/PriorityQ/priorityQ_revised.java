@@ -28,7 +28,13 @@ public class priorityQ_revised {
     public long remove()             // remove minimum item
     {
         int index = getminIndex();
-        return queArray[--nItems];
+        long toRemove = queArray[index];
+
+        for (int i = index; i < nItems - 1; i++) {
+            queArray[i] = queArray[i + 1];
+        }
+        nItems--;
+        return toRemove;
     }
 
     //-------------------------------------------------------------
@@ -63,6 +69,22 @@ public class priorityQ_revised {
     {
         return (nItems == maxSize);
     }
+
+    //-------------------------------------------------------------
+    public void showAll() {
+
+        if(isEmpty()) {
+            System.out.println("Empty Queue");
+        } else {
+            for (long number:queArray) {
+                System.out.print (number + " ");
+            }
+            System.out.println("");
+        }
+
+    }
+
+
 //-------------------------------------------------------------
 }  // end class PriorityQ
 
@@ -78,12 +100,14 @@ class priorityQ_revisedApp {
 
         System.out.println("peek " + thePQ.peekMin());
 
+        thePQ.showAll();
         while (!thePQ.isEmpty()) {
             long item = thePQ.remove();
             System.out.print(item + " ");  // 10, 20, 30, 40, 50
         }  // end while
         System.out.println("");
 
+        thePQ.showAll();
 
     }  // end main()
 //-------------------------------------------------------------
