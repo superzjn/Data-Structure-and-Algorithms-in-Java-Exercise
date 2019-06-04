@@ -21,7 +21,7 @@ public class priorityQ_revised {
         if (!isFull())
             queArray[nItems++] = item;
         else
-            System.out.println("Queue is full");
+            System.out.println("queue.Queue is full");
     }  // end insert()
 
     //-------------------------------------------------------------
@@ -74,7 +74,7 @@ public class priorityQ_revised {
     public void showAll() {
 
         if(isEmpty()) {
-            System.out.println("Empty Queue");
+            System.out.println("Empty queue.Queue");
         } else {
             for (long number:queArray) {
                 System.out.print (number + " ");

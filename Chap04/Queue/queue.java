@@ -64,7 +64,7 @@ class Queue {
 
     //--------------------------------------------------------------
     // Project 4.1--------------------------------------------
-    public void showall() {
+    public void display() {
 
         if (nItems == 0) System.out.println("No item in the queue");
         else {
@@ -103,7 +103,7 @@ class QueueApp {
         theQueue.insert(70);
         theQueue.insert(80);
 
-        theQueue.showall();             // Project 4.1
+        theQueue.display();             // Project 4.1
 
         while (!theQueue.isEmpty())    // remove and display
         {                            //    all items

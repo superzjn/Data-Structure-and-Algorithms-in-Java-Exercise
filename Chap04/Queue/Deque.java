@@ -31,7 +31,7 @@ class Deque {
             nItems++;
 
         } else {
-            System.out.println("Queue is full");
+            System.out.println("queue.Queue is full");
         }
 
     }
@@ -46,7 +46,7 @@ class Deque {
 
 
         } else {
-            System.out.println("Queue is full");
+            System.out.println("queue.Queue is full");
         }
 
     }
@@ -54,7 +54,7 @@ class Deque {
     public void removeLeft() {
 
         if (isEmpty()) {
-            System.out.println("Queue is empty");
+            System.out.println("queue.Queue is empty");
         } else {
             if (front == rear) {                    // Only one item in the queue
                 rear--;
@@ -70,7 +70,7 @@ class Deque {
     public int removeRight() {
         int item = 0;
         if (isEmpty()) {
-            System.out.println("Queue is empty");
+            System.out.println("queue.Queue is empty");
             return -1;
         } else {
             if (front == rear) {                    // Only one item in the queue
@@ -119,7 +119,7 @@ class Deque {
 
 }
 
-class dequeApp {
+class DequeApp {
 
     public static void main(String[] args) {
 
