@@ -1,7 +1,7 @@
 // Project 4.4-----------------------------------------------------
 
-public class priorityQ_revised {
 
+public class priorityQ_revised {
     // array in sorted order, from max at 0 to min at size-1
     private int maxSize;
     private long[] queArray;

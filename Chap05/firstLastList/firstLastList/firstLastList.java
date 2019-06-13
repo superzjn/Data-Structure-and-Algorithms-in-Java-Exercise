@@ -1,3 +1,5 @@
+package firstLastList;
+
 // firstLastList.java
 // demonstrates list with first and last references
 // to run this program: C>java FirstLastApp

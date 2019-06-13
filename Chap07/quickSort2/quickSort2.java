@@ -1,3 +1,4 @@
+package quickSort12;
 // quickSort2.java
 // demonstrates quick sort with median-of-three partitioning
 // to run this program: C>java QuickSort2App
