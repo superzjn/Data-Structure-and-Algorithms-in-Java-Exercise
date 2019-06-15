@@ -1,3 +1,4 @@
+package mstw;
 // mstw.java
 // demonstrates minimum spanning tree with weighted graphs
 // to run this program: C>java MSTWApp
