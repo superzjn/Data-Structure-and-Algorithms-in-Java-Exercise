@@ -32,7 +32,7 @@ public class MyDoublyLinkedList {
     public void insertFirst(int data) {
         MyLink newLink = new MyLink(data);
 
-        if(isEmpty()) {
+        if (isEmpty()) {
             last = newLink;
         } else {
             first.previous = newLink;
@@ -42,16 +42,39 @@ public class MyDoublyLinkedList {
     }
 
     public void insertLast(int data) {
+        MyLink newLink = new MyLink(data);
+
+        if (isEmpty()) {
+            first = newLink;
+        } else {
+            last.next = newLink;
+        }
+        newLink.previous = last;
+        last = newLink;
 
     }
 
     public int deleteFirst() {
 
-        return 0;
+        int temp = first.data;
+        if (first.next == null) {// if only one item
+            last = null;
+        } else {
+            first.next.previous = null;
+        }
+        first = first.next;
+        return temp;
     }
 
     public int deleteLast() {
-        return 0;
+        int temp = last.data;
+        if (last.previous == null) {// if only one item
+            first = null;
+        } else {
+            last.previous.next = null;
+        }
+        last = last.previous;
+        return temp;
 
     }
 }
