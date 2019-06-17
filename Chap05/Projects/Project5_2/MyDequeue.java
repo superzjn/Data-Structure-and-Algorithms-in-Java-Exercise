@@ -4,8 +4,6 @@ package Projects.Project5_2;
 public class MyDequeue {
 
     public MyDoublyLinkedList list;
-    public MyLink rear;
-    public MyLink front;
 
     public MyDequeue() {
         this.list = new MyDoublyLinkedList();
@@ -27,6 +25,10 @@ public class MyDequeue {
         return list.deleteLast();
     }
 
+    public boolean isEmpty() {
+        return list.isEmpty();
+    }
+
     public void displayAll() {
         list.displayAll();
     }
@@ -45,6 +47,12 @@ class MyDequeueApp {
 
         myqueue.insertFromFront(4);
         myqueue.insertFromFront(5);
+        myqueue.displayAll();
+
+        myqueue.removeFromFront();
+        myqueue.displayAll();
+
+        myqueue.removeFromRear();
         myqueue.displayAll();
 
     }

@@ -81,13 +81,14 @@ public class MyDoublyLinkedList {
 
     public void displayAll() {
 
+        MyLink display = first;
         if (isEmpty()) {
             System.out.println("The list is empty.");
         } else {
             System.out.print("First --> Last: ");
-            while (first != null) {
-                first.display();
-                first = first.next;
+            while (display != null) {
+                display.display();
+                display = display.next;
             }
             System.out.println();
 
