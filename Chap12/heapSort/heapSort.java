@@ -1,3 +1,4 @@
+package heapSort;
 // heapSort.java
 // demonstrates heap sort
 // to run this program: C>java HeapSortApp

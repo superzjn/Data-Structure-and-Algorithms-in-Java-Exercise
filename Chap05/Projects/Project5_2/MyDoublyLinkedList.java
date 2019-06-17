@@ -1,6 +1,8 @@
 // Project 5.2
 package Projects.Project5_2;
 
+import java.sql.SQLOutput;
+
 class MyLink {
     public int data;
     public MyLink next;
@@ -11,7 +13,7 @@ class MyLink {
     }
 
     public void display() {
-        System.out.println(this.data + " ");
+        System.out.print(this.data + " ");
     }
 
 }
@@ -75,6 +77,21 @@ public class MyDoublyLinkedList {
         }
         last = last.previous;
         return temp;
-
     }
+
+    public void displayAll() {
+
+        if (isEmpty()) {
+            System.out.println("The list is empty.");
+        } else {
+            System.out.print("First --> Last: ");
+            while (first != null) {
+                first.display();
+                first = first.next;
+            }
+            System.out.println();
+
+        }
+    }
+
 }

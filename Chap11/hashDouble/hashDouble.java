@@ -1,3 +1,4 @@
+package hashDouble;
 // hashDouble.java
 // demonstrates hash table with double hashing
 // to run this program: C:>java HashDoubleApp

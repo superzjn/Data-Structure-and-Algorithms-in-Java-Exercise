@@ -1,3 +1,4 @@
+package bfs;
 // bfs.java
 // demonstrates breadth-first search
 // to run this program: C>java BFSApp

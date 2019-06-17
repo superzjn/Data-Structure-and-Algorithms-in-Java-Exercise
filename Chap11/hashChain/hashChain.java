@@ -1,3 +1,4 @@
+package hashChain;
 // hashChain.java
 // demonstrates hash table with separate chaining
 // to run this program: C:>java HashChainApp
