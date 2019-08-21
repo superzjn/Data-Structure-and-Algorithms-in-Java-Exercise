@@ -1,4 +1,4 @@
-package Project8_3;// tree.java
+package Projects.Project8_3;// tree.java
 // demonstrates binary tree
 // to run this program: C>java TreeApp
 
