@@ -8,7 +8,6 @@ import java.util.Map;
 import java.util.Map.*;
 import java.util.Stack;
 
-
 class Node {
 
     String data;
@@ -84,6 +83,7 @@ class PriorityQueue {
         nItems = 0;
     }
 
+    // Enqueue as in order
     public void add(Tree newitem) {
 
         if (queArray[0] == null) {
@@ -105,7 +105,6 @@ class PriorityQueue {
             nItems++;
         }
         //   showQueue();
-
     }
 
     public Tree deQueue() {
@@ -117,16 +116,22 @@ class PriorityQueue {
         for (Tree item : queArray) {
             if (item != null)
                 System.out.println(item.root.data + " " + item.root.freq);
-
         }
     }
 }
 
 class HuffmanCode {
 
+    Map<String, String> huffmancodeTable;
+    Tree huffmantree;
+
+    public HuffmanCode() {
+        huffmancodeTable = new HashMap<String, String>();
+    }
+
     public Map generateFreqTable(String input) {
 
-        String text = input.trim().toUpperCase();
+        String text = input.toUpperCase();
         Map<String, Integer> table = new HashMap<String, Integer>();
         for (int i = 0; i < text.length(); i++) {
             char ch = text.charAt(i);
@@ -147,7 +152,7 @@ class HuffmanCode {
         return table;
     }
 
-    public Tree generateTree(Map<String, Integer> table) {
+    public void generateTree(Map<String, Integer> table) {
 
         PriorityQueue queue = new PriorityQueue(table.size());
 
@@ -161,17 +166,85 @@ class HuffmanCode {
         while (queue.nItems > 1) {
             Tree tree1 = queue.deQueue();
             Tree tree2 = queue.deQueue();
-            Node leftnode = tree1.root;
-            Node rightnode = tree2.root;
+            Node leftNode = tree1.root;
+            Node rightNode = tree2.root;
 
-            Node newnode = new Node("ep");
-            newnode.freq = leftnode.freq + rightnode.freq;
-            newnode.leftChild = leftnode;
-            newnode.rightChild = rightnode;
-            Tree newtree = new Tree(newnode);
-            queue.add(newtree);
+            Node newNode = new Node("ep");
+            newNode.freq = leftNode.freq + rightNode.freq;
+            newNode.leftChild = leftNode;
+            newNode.rightChild = rightNode;
+            Tree newTree = new Tree(newNode);
+            queue.add(newTree);
         }
-        return queue.deQueue();
+        huffmantree = queue.deQueue();
+    }
+
+    public void generateCodeTable() {
+
+        traverseAndRecord(huffmantree.root, "");
+
+        for (Entry<String, String> entry : huffmancodeTable.entrySet()) {
+            System.out.println(entry.getKey() + " " + entry.getValue());
+        }
+    }
+
+    public void traverseAndRecord(Node localroot, String recorder) {
+
+        if (localroot.data == "ep") {
+            traverseAndRecord(localroot.leftChild, recorder + "0");
+            traverseAndRecord(localroot.rightChild, recorder + "1");
+        } else {
+            huffmancodeTable.putIfAbsent(localroot.data, recorder);
+        }
+    }
+
+    public String decode(String text) {
+
+        StringBuilder decode = new StringBuilder();
+        Node node = huffmantree.root;
+
+        for (int i = 0; i < text.length(); i++) {
+
+            if (node.data.equals("ep")) {
+                char ch = text.charAt(i);
+
+                if (ch == '0') {
+                    node = node.leftChild;
+                } else {
+                    node = node.rightChild;
+                }
+            }
+
+            if (!node.data.equals("ep")) {    // If current node is leaf
+
+                if (node.data.equals("Sp")) {
+                    decode.append(" ");
+                } else {
+                    decode.append(node.data);
+                }
+                node = huffmantree.root;
+            }
+
+        }
+        return decode.toString();
+    }
+
+    public String encode(String plaintext) {
+
+        StringBuilder encodedText = new StringBuilder();
+        String key = null;
+
+        for (int i = 0; i < plaintext.length(); i++) {
+            if (plaintext.charAt(i) == ' ') {
+                key = "Sp";
+            } else {
+                key = Character.toString(plaintext.charAt(i)).toUpperCase();
+            }
+            String code = huffmancodeTable.get(key);
+            encodedText.append(code);
+        }
+
+        return encodedText.toString();
     }
 }
 
@@ -180,9 +253,22 @@ class App {
         System.out.println("Please enter a sentence:");
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         String input = reader.readLine();
-        HuffmanCode tree = new HuffmanCode();
-        Map map = tree.generateFreqTable(input);
-        Tree huffmantree = tree.generateTree(map);
-        huffmantree.displayTree();
+
+        HuffmanCode coder = new HuffmanCode();
+
+        Map freqmap = coder.generateFreqTable(input);
+        coder.generateTree(freqmap);
+        coder.huffmantree.displayTree();
+        coder.generateCodeTable();
+
+        System.out.println("-------------Encoding-----------");
+        String encodeText = coder.encode(input);
+        System.out.println(encodeText);
+
+
+        System.out.println("-------------Decoding-----------");
+        String decodeMsg = coder.decode(encodeText);
+        System.out.println(decodeMsg);
+
     }
 }
